@@ -20,3 +20,10 @@ eigene Dienste wie Web-Auftritt, Mail, evtl Code-Hosting-Dienst
 weitere Anforderungen:
 
 alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht werden können
+
+## TODOs:
+(ohne Reihenfolge)
+- Konzeption des Netzwerkes
+- Lernen von Ansible
+- Implementation
+- Dokumentation
