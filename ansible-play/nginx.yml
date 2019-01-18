@@ -1,0 +1,8 @@
+---
+- hosts: local
+  connection: local
+  tasks:
+  - name: start docker
+    docker_container:
+      name: 'nginx-server'
+      image: 'docker.io'
