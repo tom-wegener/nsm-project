@@ -1,5 +1,13 @@
-[local]
-127.0.0.1
+[darkfiber-r]
+192.168.0.2
 
-[remote]
-127.0.0.1
+[dmz-r]
+
+
+[kern-r]
+
+
+[client-r]
+
+
+[server-r]
