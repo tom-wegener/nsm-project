@@ -1,18 +1,18 @@
 # Beleg im Modul NSM für INM
 
-## Details:
+## Details
 
 Semester: WS 2018/2019
 
 Bearbeiter: Tom Wegener
 
-## Aufgabe:
+## Aufgabe
 
 Grundaufgabe:
 
 Konzeption einer Netzwerk und Serverstruktur einer Fakultät und Aufbau via Ansible Playbooks
 
-weietere Details:
+weitere Details:
 
 Verbindung zur Hochschule über Dark Fiber
 eigene Dienste wie Web-Auftritt, Mail, evtl Code-Hosting-Dienst
@@ -21,9 +21,57 @@ weitere Anforderungen:
 
 alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht werden können
 
-## TODOs:
+## Konzept
+
+### Router
+
+- r1 - Kernrouter
+- r2 - Dark-Fiber-Router (tap-Interface)
+- r3 - DMZ-Router
+- r4 - Server-side Router (DBs usw)
+- r5 - Client-Netzwerk-Router
+
+### Sektion: DMZ
+
+- S1
+- S2
+- S3
+
+### Sektion: Server-Netzwerk
+
+### Sektion Client-Netzwerk
+
+## TODOs
+
 (ohne Reihenfolge)
+
 - Konzeption des Netzwerkes
 - Lernen von Ansible
 - Implementation
 - Dokumentation
+
+## Cheat-sheet
+
+### Ansible
+
+`ansible -i ./hosts  local -u root  -m ping`
+
+### NK-Machines
+
+- vstart: starts a new virtual machine
+- vlist: lists currently running virtual machines
+- vlist: lists currently running virtual machines
+- vconfig: attaches network interfaces to running vms
+- vhalt: gracefully halts a virtual machine
+- vcrash: causes a virtual machine to crash
+- vclean: “panic command” to clean up all netkit
+
+### NK-Labs
+
+- lstart: starts a netkit lab
+- lhalt: gracefully halts all vms of a lab
+- lcrash: causes all the vms of a lab to crash
+- lcrash: causes all the vms of a lab to crash
+- lclean: removes temporary files from a lab directory
+- linfo: provides information about a lab without starting it
+- ltest: allows to run tests to check that the lab is working properly
