@@ -1,1 +1,10 @@
-ifconfig eth0 10.0.0.1 netmask 255.255.255.0 broadcast
+mkdir /root/.ssh
+touch /root/.ssh/authorized_keys
+chown -R root:root /root
+
+cat /hosthome/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+chmod 700 /root/.ssh
+chmod 640 /root/.ssh/authorized_keys
+
+/etc/init.d/ssh start
