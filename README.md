@@ -71,7 +71,6 @@ alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht w
 - lstart: starts a netkit lab
 - lhalt: gracefully halts all vms of a lab
 - lcrash: causes all the vms of a lab to crash
-- lcrash: causes all the vms of a lab to crash
 - lclean: removes temporary files from a lab directory
 - linfo: provides information about a lab without starting it
 - ltest: allows to run tests to check that the lab is working properly
