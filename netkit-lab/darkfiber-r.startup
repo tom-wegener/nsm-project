@@ -1,9 +1,12 @@
 ip link set eth1 up
 ip link set eth1 up
-ip address add 10.0.0.100 dev eth1 #kern
-ip address add 10.0.1.101 dev eth2 #darkfiber
+ip link set eth2 up
+ip address add 10.0.0.21 dev eth1 #kern
+ip address add 10.0.0.22 dev eth2 #dmz
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-route add -net default gw 192.168.0.1 dev eth0
-route add -net 10.0.0.0/24 gw 10.0.1.100 dev eth1 #kern
-route add -net 10.0.1.0/16 gw 10.0.1.101 dev eth2 #dmz
+route add -host 10.0.0.10 gw 10.0.0.21 dev eth1
+route add -host 10.0.0.30 gw 10.0.0.22 dev eth2 
+
+route add -net 10.0.0.0/16 gw 10.0.0.10 dev eth1 #kern
+route add -net 10.0.1.0/24 gw 10.0.0.30 dev eth2 #dmz - problematic
