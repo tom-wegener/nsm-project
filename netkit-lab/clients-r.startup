@@ -1,10 +1,10 @@
 ip link set eth0 up
-ip address add 10.0.0.50 dev eth0
-
 ip link set eth1 up
-ip address add 10.0.3.0 dev eth1
 
-route add -host 10.0.0.13 gw 10.0.0.50 dev eth0 #darkfiber - problematic
+ip address add 10.0.0.40 dev eth0
+ip address add 10.0.4.01 dev eth1
 
-route add default gw 10.0.0.13 dev eth0 #kern
-route add -net 10.0.3.0/24 gw 10.0.3.0 dev eth1 #subnet
+route add -host 10.0.0.04 gw 10.0.0.40 dev eth0 #darkfiber - problematic
+
+route add default gw 10.0.0.04 dev eth0 #kern
+route add -net 10.0.4.0/24 gw 10.0.4.01 dev eth1 #subnet

@@ -8,6 +8,6 @@ dmz-r: darkfiber-r kern-r
 dmz-web: dmz-r
 dmz-mail: dmz-r
 
-client1: client-r
+client1: clients-r
 
 server1: server-r

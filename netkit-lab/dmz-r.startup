@@ -1,14 +1,14 @@
 ip link set eth0 up
 ip link set eth1 up
 ip link set eth2 up
-ip address add 10.0.0.30 dev eth0 #darkfiber
-ip address add 10.0.0.31 dev eth1 #kern
-ip address add 10.0.1.20 dev eth2 #network
+ip address add 10.0.0.20 dev eth0 #darkfiber
+ip address add 10.0.0.21 dev eth1 #kern
+ip address add 10.0.2.01 dev eth2 #network
 
 
-route add -host 10.0.0.22 gw 10.0.0.30 dev eth0 #darkfiber - problematic
-route add -host 10.0.0.11 gw 10.0.0.31 dev eth1 #darkfiber - problematic
+route add -host 10.0.0.12 gw 10.0.0.20 dev eth0 #darkfiber
+route add -host 10.0.0.02 gw 10.0.0.21 dev eth1 #kern
 
-route add -net default gw 10.0.0.22 dev eth0 #internet
-route add -net 10.0.0.0/16 gw 10.0.0.11 dev eth1 #kern
-route add -net 10.0.1.0/24 gw 10.0.1.20 dev eth2 #subnet
+route add -net default gw 10.0.0.12 dev eth0 #internet
+route add -net 10.0.0.0/16 gw 10.0.0.02 dev eth1 #kern
+route add -net 10.0.2.0/24 gw 10.0.2.01 dev eth2 #subnet
