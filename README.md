@@ -52,6 +52,11 @@ alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht w
 
 ## Cheat-sheet
 
+### Fix routing
+
+to reach the vms from your host:
+`sudo route add -net 10.0.0.0/16 gw 192.168.60.2 dev nk_tap_luca`
+
 ### Ansible
 
 `ansible -i ./hosts  local -u root  -m ping`
