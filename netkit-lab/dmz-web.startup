@@ -1,0 +1,6 @@
+ip link set eth0 up
+
+ip address add 10.0.2.11 dev eth0 #router
+
+route add -host 10.0.2.01 gw 10.0.2.11 dev eth0
+route add -net default gw 10.0.2.01 dev eth0 #router
