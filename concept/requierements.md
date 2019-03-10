@@ -13,35 +13,27 @@ weitere Anforderungen:
 
 alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht werden können
 
-# Aufteilung in einzelne Konzepte
+## Aufteilung in einzelne Konzepte
 
-## Bau-Konzept
+### Bau-Konzept
 
 nicht notwendig bei diesem Projekt
 
-## Konzept des Netzwerkes an sich und der In-House Kommunikation
+### Konzept des Netzwerkes an sich und der In-House Kommunikation
 
-## VoIP-Konzeption
+### VoIP-Konzeption
 
-## Internet-Anbindung und Anbindung an die restliche Universität
+### Internet-Anbindung und Anbindung an die restliche Universität
 
 Über Dark Fiber (eigentlich tote, aber gmietete Leitung)
 
-## Management-Konzept
+### Management-Konzept
 
 - Ansible-Playbooks
 - Überwachung über snmp durch incinga, zabbix oder ganglia
 
-## Sicherheitskonzept
+### Sicherheitskonzept
 
 - Server für Website, Mail und Code-Hoster stehen in der DMZ
 - Die Anbindung der Clients erfolgt über ein anderes Netz als die Anbindung der Daten-Server oder Ähnlichem
 - mehrere Firewlls, je nach "Sicherheitsstufe"
-
-
-
-## Datensicherungskonzept
-
-- RAID-Systeme als Datenlösung: entweder RAID 6 oder 10
-- Sicherheit ist wichtig, aber auch schneller Zugriff
-- tägliches Backup von wichtigen Daten
