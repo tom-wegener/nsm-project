@@ -45,21 +45,32 @@ alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht w
 
 (ohne Reihenfolge)
 
-- Konzeption des Netzwerkes
-- Lernen von Ansible
-- Implementation
-- Dokumentation
+- [] Konzeption des Netzwerkes
+- [] Lernen von Ansible
+- [] Implementation
+- [] Dokumentation
 
 ## Cheat-sheet
 
 ### Fix routing
 
 to reach the vms from your host:
-`sudo route add -net 10.0.0.0/16 gw 192.168.60.2 dev nk_tap_luca`
+`sudo route add -net 10.0.0.0/16 gw 193.168.233.2 dev nk_tap_luca`
 
 ### Ansible
 
-`ansible -i ./hosts  local -u root  -m ping`
+#### CMD
+
+Select host-file: `-i ./hosts`
+
+Ping the host local: `ansible -i ./hosts  local -u root  -m ping`
+
+run command as root `ansible -i ./hosts  local -u root  -m `
+
+#### Playbooks
+
+run Playbook: `ansible-playbook playbook.yml -i ./hosts -u root`
+
 
 ### NK-Machines
 
