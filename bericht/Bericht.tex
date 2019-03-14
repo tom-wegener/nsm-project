@@ -1,0 +1,107 @@
+
+\documentclass[a4paper]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{csquotes}
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{verbatimbox}
+\usepackage{textcomp}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+
+\newenvironment{fullgrayverb}
+{\verbbox}
+{\endverbbox\par\colorbox{lightgray}{\parbox{\textwidth}{\theverbbox}}\par}
+
+\title{Netzwerk- und System-Management-Projekt}
+\subtitle{Netzwerk- und Service-Struktur einer Fakultät}
+\date{\today}
+\author{Tom Wegener, 18INM/TZ}
+
+
+\geometry{a4paper, left=30mm, right=20mm,top=25mm,bottom=25mm}
+  \fancyhead{}
+  \fancyhead[L]{Tom Wegener, 18INM/TZ}
+  \fancyhead[R]{Abschlussbericht NSM}
+  \fancyfoot{}
+  \fancyfoot[R]{\thepage}
+
+\setlength{\parindent}{0em}
+
+
+\begin{document}
+
+\pagestyle{empty}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\pagestyle{fancy}
+
+\setcounter{page}{1}
+
+\section{Einleitung}
+Für das Modul Netzwerk- und System-Management (NSM) sollen die Studierenden des Studiengangs "Informatik Master" der HTWK Leipzig die Infrastruktur einer Fakultät erstellen, die sich außerhalb des Universitäts-netzes befindet.
+
+Das Projekt soll mit Hilfe von Netkit als virtuelle Infrastruktur realisiert werden und anschließend über Ansible konfiguriert werden.
+
+\section{Konzept}
+
+\subsection{Anforderungen}
+Das Netzwerk der Fakultät erhält Internet und Anbindung an die Universität über eine sogenannte Dark Fiber-Leitung, diese ist eine bisher ungenutzte und angemietet Leitung eines bereits verlegten Netzes. Des weiteren werden durch die Fakultät Services, wie Mail, ein Web-Auftritt und weitere AAA-Services angeboten, 
+
+\subsection{Konzeption}
+\subsection{FCAPS}
+\subsection{Fault-Management}
+\subsubsection{Configuration Management}
+\subsubsection{Administration und Accounting Management}
+\subsubsection{Performance Management}
+\subsubsection{Security Management}
+
+\subsection{Ergänzung}
+Angesichts der Größe des Netzwerkes und der Masse der Server, sowie Clients, ist es angeraten ein Werkzeug zu nutzen, welches es erleichtert einen Überblick zu behalten, sowie die Provisionierung erleichtert. Deshalb ist die Nutzung von dem Tool \href{www.theforeman.org}{Foreman} zu empfehlen. Es ermöglich eine einfache Erst-Provisionierung über PXE von Clients sowie Servern mit einem Betriebssystem. Außerdem kann über ein Plugin die anschließende Provisionierung über Ansible oder auch SALT gemanaged werden und diese auch überwacht werden. Eine Überwachung der Hosts wird über puppet automatisch realisiert.
+
+Sollte ein Host ausfallen kann dieses dadurch schnell erkannt werden und ein weiterer Host mit den gleichen Einstellungen schnell erstellt werden.
+
+Über die große Auswahl an Plugins kann die Funktionalität auch erweitert werden. Das Plugin ''foreman\_datacenters'' der IT-Abteilung von der Drogeriemarkt-Kette DM, ermöglicht zum Beispiel eine übersichtliche Organisierung der Hosts.
+
+Leider war es nicht möglich einen Foreman-Server mit Netkit zu nutzen.
+
+\section{Umsetzung}
+\subsection{Ausblick}
+
+\section{Fazit}
+
+\newpage
+
+\section{Anhang}
+\subsection{Glossar}
+
+\begin{fullgrayverb}
+>ref|XP_021694431.1| gametogenetin-binding protein 2-like [Aedes aegypti]
+MAKLTYVYRSDEMNCVKVSKRQLPLIGGENLMMLMDLNSRGLVFDQPPVKGQELDDFAKKYRVLTPAELR
+LSLNVPTIEFTSVLSQNVPCVGCRRSVERLFYQLMLSGHPTLDPIVITGRGVLTISEDKMKSPQ...
+\end{fullgrayverb}\\
+
+
+\end{document}
