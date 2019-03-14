@@ -25,7 +25,7 @@ nicht notwendig bei diesem Projekt
 
 ### Internet-Anbindung und Anbindung an die restliche Universität
 
-Über Dark Fiber (eigentlich tote, aber gmietete Leitung)
+Über Dark Fiber (eigentlich tote, aber gemietete Leitung)
 
 ### Management-Konzept
 
