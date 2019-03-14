@@ -8,3 +8,5 @@ chmod 700 /root/.ssh
 chmod 640 /root/.ssh/authorized_keys
 
 /etc/init.d/ssh start
+
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
