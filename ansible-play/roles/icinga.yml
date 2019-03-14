@@ -1,0 +1,50 @@
+---
+- hosts: server-incinga
+  tasks:
+  - name: Install apt-https
+    become: true
+    apt:
+      name: apt-transport-https
+      state: latest
+      update_cache: yes
+  - name: add icinga2 apt-key
+    apt_key: 
+      url: https://packages.icinga.com/icinga.key
+      state: present 
+  - name: add repo for deps of icinga
+    apt_repository:
+      repo: 'deb http://http.debian.net/debian wheezy-backports main'
+      state: present
+      filename: backports
+  - name: add icinga apt repository
+    apt_repository: 
+      repo: 'deb https://packages.icinga.com/debian icinga-wheezy main' 
+      state: present 
+      filename: icinga
+      update_cache: yes
+  - name: Install icinga2
+    become: true
+    apt:
+      name: icinga2
+      state: latest
+  - name: Install monitoring-plugins
+    become: true
+    apt:
+      name: monitoring-plugins
+      state: latest
+  - name: Install the web-reqs for icinga web2 pt1
+    become: true
+    apt: 
+      name:
+      - postgresql
+      - icinga2-ido-pgsql
+  - name: set up role
+    postgresql_user:
+      name: icinga
+      password: icinga
+
+  - name: set up db
+    postgresql_db:
+      name: icinga
+      encoding: UTF-8
+      owner: icinga
