@@ -1,13 +1,29 @@
 [darkfiber-r]
-192.168.0.2
+192.168.60.2
 
 [dmz-r]
+10.0.0.21
 
+[dmz-web]
+10.0.2.11
+
+[dmz-mail]
+10.0.2.21
 
 [kern-r]
-
+10.0.0.01
 
 [client-r]
+10.0.0.40
 
+[clients]
+10.0.4.11
 
 [server-r]
+10.0.0.30
+
+[servers]
+10.0.3.11
+
+[server-incinga]
+10.0.3.21
