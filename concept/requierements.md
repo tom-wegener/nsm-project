@@ -9,6 +9,8 @@ weietere Details:
 Verbindung zur Hochschule über Dark Fiber
 eigene Dienste wie Web-Auftritt, Mail, evtl Code-Hosting-Dienst
 
+AAA-Services: Authentication, Authorization, Accounting
+
 weitere Anforderungen:
 
 alle Instanzen sollen über snmp durch incinga, zabbix oder ganglia überwacht werden können
