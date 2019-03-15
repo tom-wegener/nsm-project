@@ -65,7 +65,7 @@ Select host-file: `-i ./hosts`
 
 Ping the host local: `ansible -i ./hosts  local -u root  -m ping`
 
-run command as root `ansible -i ./hosts  local -u root  -m `
+run command as root `ansible -i ./hosts  local -u root  -m`
 
 #### Playbooks
 
