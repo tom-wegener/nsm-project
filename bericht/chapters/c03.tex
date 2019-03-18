@@ -1,0 +1,22 @@
+\chapter{Umsetzung}
+
+Für die Umsetzung musste statt dem originalen Netkit Netkit-ng genutzt werden, welches python2.7 unterstützt, das für Ansible benötigt wird. Ein Update der Netkit-Instanzen auf python2.7 war auf Grund des Alters des File-Systems nicht möglich.
+
+Es wurde eine wie in \ref{fig:model} Topologie erzeugt und über statische Routen eine grundlegende Netzwerk-Kommunikation ermöglicht. Die virtuellen Maschine, die mit ''r'' enden, sind die Router, die Herzstücke des Netzwerkes bzw. der Subnetzwerke bilden. Außerdem fangen die Namen der Maschinen mit dem jeweiligen Subnetzwerk an, zu dem sie gehören. So ist ''server-r'' der Router des Server-Netzwerkes, während ''server-foreman'' der Foreman-Server im Server-Netzwerk ist.
+
+\section{Darkfiber}
+Über die VM ''darkfiber-r'' wird eine Internet-Anbindung realisiert, wie sie in den Anforderungen gefordert wird. Die VM hat drei Anschlüsse, einer ist die Verbindung zu dem Internet bzw. die Dark-Fiber-Anbindung, die zweite Leitung führt zu dem Kern-Subnetzwerk, während die dritte Leitung zu der demilitarisierten Zone führt.
+
+\section{Kern-Subnetz}
+Über das Kern-Subnetz werden für alle Subnetze eine Verbindung zu jeweils anderen Subnetzen zur Verfügung gestellt, sowie auch die Verbindung zum Internet. 
+
+\section{DMZ}
+In der DMZ, also der demilitarisierten Zone, stehen die Server, die über das Internet erreichbar sein sollen. Dementsprechend ist der Web-Auftritt der Fakultät, sowie der Mail-Server und verschiedenen andere Dienste in der DMZ vertreten, aus Sicherheitsgründen werden jedoch personenbezogene Daten aus dem Server-Netzwerk nachgeladen.
+
+\section{Server-Subnetz}
+In dem Server-Subnetz sind die verschiedenen Server der Fakultät enthalten, die für Datenspeicherung und Datenverarbeitung benötigt werden. Außerdem sind die Server, die für die Administration des Netzwerkes benötigt werden, wie die Icinga-Instanz und der Foreman-Server, ebenfalls in diesem Netzwerk vertreten. Auf sie kann über den Computer in dem Subnetz zugegriffen werden oder über Computer aus den anderen Subnetzen, jedoch nicht direkt über den Darkfiber-Router.
+
+\section{Client-Subnetz}
+Das Client-Subnetz ist mit dem Kern-Subnetz verbunden und kann über den Kern-Router eine Verbindung zu den anderen Subnetzen und zu dem Server aufbauen. Zu dem Client-Subnetz gehören einerseits alle fest verbauten Computer der Computer-Pools, sowie die Computer der Lehrenden und der weiteren Angestellten. Außerdem sind verschiedenen Wireless-Access-Points auch mit diesem Netzwerk verbunden, darüber können die Studierenden sich mit dem Internet verbinden.
+
+\section{Ausblick}
