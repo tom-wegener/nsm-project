@@ -52,13 +52,14 @@ Das Konfigurationsmanagement wird über Ansible abgewicklet. Dabei werden die ei
 Durch eine Integration von Ansible in Foreman über das dazugehörige Plugin kann die Ausführung von playbooks einfach umgesetzt werden, sowie die Ausführung überwacht werden. Die Ergebnisse der Ausführung werden bei Foreman je Host aufgelistet.
 
 \subsection{Administration and Accounting Management}
-Administration and Accounting Management
+''Administration and Accounting Management'' beinhaltet das Management der Accounts und der für die Abrechnung benötigten Nutzungsdaten. Das beinhaltet die AAA-Services. Die Nutzenden werden dafür in verschiedene Gruppen mit dazugehörigen Zugriffsrechten eingeteilt. Zusätzlich gibt es für jede Gruppe noch eine zusätzliche Gruppe in der Nutzende eingeteilt werden, die zusätzliche Rechte erhalten. Sollte eine Studentin z.B. zusätzliche Rechte benötigen, weil sie im Fachschaftsrat ist und dort die Website, die auf Fakultätsservern liegt, betreut, erhält zusätzliche Rechte, aber wird dafür nicht in die Gruppe der Website-Administrierenden aufgenommen.
 
 
 \subsection{Performance Management}
 ''Performance Management'' bedeutet die Überwachung der Performance aller Komponenten des Netzwerkes. Dabei muss die Auslastung der Server, die Gesundheit und das Alter von Festplatten und anderen (Netzwerk-)Komponenten überwacht werden.
 
-Grundlegendes Performanmces-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine grundlegende Überwachung ermöglichen. Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
+Grundlegendes Performanmce-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine grundlegende Überwachung ermöglichen. 
+Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
 
 \subsection{Security Management}
 Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst zu sein und diese so gut wie möglich zu verbessern. Das beinhaltet die physische, sowie die digitale Sicherheit.
