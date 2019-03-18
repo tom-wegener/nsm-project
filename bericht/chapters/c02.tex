@@ -31,7 +31,7 @@ Die Rechner der Angestellten der Fakultät, sowie der Studierenden der Fakultät
 Generell soll das Netzwerk durch das Tool \href{www.theforeman.org}{Foreman} gemanaged werden. Foreman ermöglicht die Administration von Hosts und kann auch für die Administration von großen Netzwerken samt Routern, Clients und Servern genutzt werden. Über eine Web-Oberfläche wird es ermöglicht einen Überblick zu behalten, sowie die Provisionierung und die Konfiguration abzuwickeln.
 Das Administrationstool wickelt die Konfiguration eigentlich über Puppet ab, kann jedoch durch Plugins erweitert werden, wie dem Ansible-Plugin. 
 
-Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kann zusätzlich das kommerzielle Management-Tool Landscape von Canonical benutzt werden. Es ermöglicht eine einfache Administration verschiedener Instanzen und kann die Auslastung, Zustand der Hardware und den Sicherheitszustand anzeigen.
+Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kann zusätzlich das kommerzielle Management-Tool Landscape von Canonical benutzt werden. Es ermöglicht eine einfache Administration verschiedener Instanzen und kann die Auslastung, Zustand der Hardware und den Sicherheitszustand anzeigen. Landscape basiert aus einer Agent-Architektur, erfordern also einen Client auf den zu verwaltenden Rechnern.
 
 Außerdem können Foreman und Landscape auch bei der Realisierung von FCAPS helfen.
 
@@ -52,9 +52,13 @@ Das Konfigurationsmanagement wird über Ansible abgewicklet. Dabei werden die ei
 Durch eine Integration von Ansible in Foreman über das dazugehörige Plugin kann die Ausführung von playbooks einfach umgesetzt werden, sowie die Ausführung überwacht werden. Die Ergebnisse der Ausführung werden bei Foreman je Host aufgelistet.
 
 \subsection{Administration and Accounting Management}
+Administration and Accounting Management
+
 
 \subsection{Performance Management}
-Performance Management bedeutet die Überwachung der Performance aller Komponenten des Netzwerkes. Dabei muss die Auslastung der Server, die Gesundheit und das Alter von Festplatten und anderen (Netzwerk-)Komponenten überwacht werden.
+''Performance Management'' bedeutet die Überwachung der Performance aller Komponenten des Netzwerkes. Dabei muss die Auslastung der Server, die Gesundheit und das Alter von Festplatten und anderen (Netzwerk-)Komponenten überwacht werden.
+
+Grundlegendes Performanmces-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine grundlegende Überwachung ermöglichen. Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
 
 \subsection{Security Management}
 Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst zu sein und diese so gut wie möglich zu verbessern. Das beinhaltet die physische, sowie die digitale Sicherheit.
@@ -68,3 +72,5 @@ Die Authorisierung für die Dienste und das Netzwerk wird über den AAA-Server r
 Alle über das Internet erreichbaren Dienste können nur über https erreicht werden, während bestimmte Dienste, wie ein File-Server, nur über ein VPN erreichbar sind.
 
 Außerdem wird der Zugriff auf z.B. das Server-Netzwerk aus dem Internet eingeschränkt. Die es kann nur aus dem Client-Netzwerk und der DMZ auf Daten, die auf diesen Servern liegen zugegriffen werden. Außerdem werden über die beiden Firewalls die Zugriffe zusätzlich beschränkt und verschiedenen IP-Adressen geblockt.
+
+Über Landscape kann überwacht werden, welche Sicherheits-Updates die Software, die auf den Rechnern installiert ist, noch ausstehend sind.
