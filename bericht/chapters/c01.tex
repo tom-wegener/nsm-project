@@ -11,3 +11,9 @@ Das Projekt wurde nicht innerhalb der VM umgesetzt, sondern für bessere Perform
 Die Verbindung zwischen dem Host bzw. Ansible und den Netkit-VMs wird über SSH realisiert in einer Agent-less Architektur.
 
 Durch die trotzdem veraltete Version des Netkit-File-Systems können einige Sachen nicht wie im Konzept beschrieben umgesetzt werden. Durch ein Update des File-Systems auf eine neuere Debian-Version, kann dies ermöglicht werden. Für dieses Projekt wurde versucht, die bereits vorhandene Software so wenig wie möglich zu verändern. Dementsprechend sind auch nur relevante Applikationen auf den VMs aktuell, es wurde kein generelles Update ausgeführt.
+
+\section{Anforderungen}
+Die Fakultät ist in einem weit von der Universität entfernten Gebäudekomplex untergebracht, die Infrastruktur für die Fakultät muss dementsprechend als eigene, unabhängige Infrastruktur behandelt werden. Diese Infrastruktur soll alle notwendigen Dienste der Fakultät beinhalten, wie ein Web-Auftritt, ein Mail-Service und die AAA-Services beinhalten.
+Das Netzwerk der Fakultät erhält Internet und Anbindung an die Universität über eine sogenannte Dark Fiber-Leitung, diese ist eine bisher ungenutzte und angemietet Leitung eines bereits verlegten Netzes.
+
+Außerdem sollen die einzelnen Server über SNMP über Icinga, Zabbix oder Ganglia überwachbar sein.
