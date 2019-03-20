@@ -14,6 +14,11 @@ Verbunden wird alles über das Kern-Netzwerk, welches für sich auch ein eigenes
 
 In der Abbildung ist pro Netzwerk nur ein Router eingezeichnet, um die Übersichtlichkeit zu verbessern. Es sollte bei einer Umsetzung bedacht werden, dass es mindestens zwei gibt, um einerseits einen Ersatz bei einem Ausfall zu haben, aber auch, um  ein Load-Balancing zu ermöglichen.
 
+\subsection{Das Kern-Netzwerk}
+Das Kern-Netzwerk enthält die Router, die dafür zuständig sind, den Traffic der gesamten Infrastruktur abzuwickeln. Ausgenommen davon sind Zugriffe auf die Server der DMZ, die aus dem Internet heraus bzw. über die Dark-Fiber-Verbindung getätigt werden.
+
+Die Routen werden statisch festgelegt und die Router wissen von den einzelnen Subnetzwerken und können dementsprechend den Traffic unterscheiden. Die Router der einzelnen Subnetzwerke wissen nur von den Adressen in dem jeweiligen Sub-Netzwerk und können nur zwischen Traffic für das eigene Netzwerk und die restliche Infrastruktur unterscheiden.
+
 \subsection{Die Demilitarisierte Zone}
 Die DMZ stellt alle Dienste bereit, die über das Internet erreichbar sein sollen, also einen Web-Server, einen Mail-Server und einen AAA-Server. Jedoch werden kritische Daten nicht auf Servern in der DMZ gespeichert, sondern sind auf Servern in dem Server-Netzwerk gespeichert, die jedoch über Server aus der DMZ erreichbar sind.
 
@@ -52,6 +57,8 @@ Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kan
 
 Außerdem können Foreman und Landscape auch bei der Realisierung von FCAPS helfen.
 
+\newpage
+
 \section{FCAPS}
 FCAPS ist ein Modell für das Management von Netzwerken bzw. Infrastrukturen, es ist ein Akronym für Fault-Management, Configuration-Management, Administration and Accounting Management, Performance Management und Security Management. FCAPS wird in diesem Fall über verschiedene Tools und mit Hilfe von Foreman realisiert.
 
@@ -81,7 +88,7 @@ Für das Accounting-Management, sowie die Nutzenden-Verwaltung muss ein Konzept 
 Grundlegendes Performance-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine Überwachung ermöglichen. 
 Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
 
-
+\newpage
 \subsection{Security Management}
 Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst zu sein und diese so gut wie möglich zu verbessern. Das beinhaltet die physische, sowie die digitale Sicherheit.
 
