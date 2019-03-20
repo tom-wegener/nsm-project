@@ -1,15 +1,8 @@
 \chapter{Konzept}
-Es soll die Infrastruktur einer externen Fakultät realsiert werden.
 
-\section{Anforderungen}
-Die Fakultät ist in einem weit von der Universität entfernten Gebäudekomplex untergebracht, die Infrastruktur für die Fakultät muss dementsprechend als eigene, unabhängige Infrastruktur behandelt werden. Diese Infrastruktur soll alle notwendigen Dienste der Fakultät beinhalten, wie ein Web-Auftritt, ein Mail-Service und die AAA-Services beinhalten.
-Das Netzwerk der Fakultät erhält Internet und Anbindung an die Universität über eine sogenannte Dark Fiber-Leitung, diese ist eine bisher ungenutzte und angemietet Leitung eines bereits verlegten Netzes.
+Für das Netzwerk-Konzept wurde eine Struktur mit mehreren getrennten Subnetzen gewählt, das eine einfache Administration gewährleistet, eine Erweiterung erleichtert und es erleichtert sicherheits-relevante Änderungen schnell umzusetzen. Im Kapitel Netzwerke und Sub-Netzwerke wird auf die Struktur eingegangen, während im Kapitel Werkzeuge die benötigte Software kurz vorgestellt wird und im Kapitel FCAPS die Nutzung genauer erläutert wird.
 
-Außerdem sollen die einzelnen Server über SNMP über Icinga, Zabbix oder Ganglia überwachbar sein.
-
-\section{Konzeption}
-Für das Netzwerk-Konzept wurde eine Struktur mit mehreren getrennten Subnetzen gewählt, das eine einfache Administration gewährleistet, eine Erweiterung erleichtert und es erleichtert sicherheits-relevante Änderungen schnell umzusetzen.
-
+\section{Netzwerke und Sub-Netzwerke}
 Die Infrastruktur besteht grundlegend aus drei Subnetzen, sowie einem großen Netzwerk. Die Verbindung der Subnetze wird über das Kern-Netzwerk bzw. den Kern-Router ermöglicht. Zusätzlich zu dem Kern-Router hat jedes Subnetzwerk einen Router und der Anschluss über die Dark-Fiber-Leitung wird auch über einen Router realisiert. Die drei Subnetzwerke sind die demilitarisierte Zone (DMZ), das Server-Netzwerk und das Client-Netzwerk.
 Verbunden wird alles über das Kern-Netzwerk, welches für sich auch ein eigenes Subnetz darstellt. Über dieses Netzwerk werden die verschiedenen Netzwerke verbunden. Die gesamte Infrastruktur ist vereinfacht in der Abbildung \ref{fig:model} grafisch dargestellt.
 
@@ -21,15 +14,35 @@ Verbunden wird alles über das Kern-Netzwerk, welches für sich auch ein eigenes
 
 In der Abbildung ist pro Netzwerk nur ein Router eingezeichnet, um die Übersichtlichkeit zu verbessern. Es sollte bei einer Umsetzung bedacht werden, dass es mindestens zwei gibt, um einerseits einen Ersatz bei einem Ausfall zu haben, aber auch, um  ein Load-Balancing zu ermöglichen.
 
+\subsection{Die Demilitarisierte Zone}
 Die DMZ stellt alle Dienste bereit, die über das Internet erreichbar sein sollen, also einen Web-Server, einen Mail-Server und einen AAA-Server. Jedoch werden kritische Daten nicht auf Servern in der DMZ gespeichert, sondern sind auf Servern in dem Server-Netzwerk gespeichert, die jedoch über Server aus der DMZ erreichbar sind.
 
-Das Server-Netzwerk ist für die Bereitstellung von Daten und Diensten innerhalb der Fakultät zuständig. Zur Sicherheit sollten keine Daten aus diesem Subnetz direkt den Dark-Fiber-Router passieren, sondern maximal über einen Server der DMZ abgefragt werden und dann weitergeleitet werden.
-Das Netzwerk enthält den für den AAA-Services benötigten Server, die benötigten Datenbanken, die Incinga-Instanz, sowie den Foreman-Server. Außerdem können spezifische weitere Services in dem Netz realisiert werden.
+In der DMZ ist ein FTP-Server, der Daten aus dem Server-Netzwerk abfragt, der Web-Server, der Mail-Server, der genau so, wie der FTP-Server die Daten auch von Servern des Server-Netzwerkes nachlädt und ein DNS-Server. Eine GitLab-Instanz kann ebenfalls hier positioniert werden.
 
+Als IP-Adress-Bereich wurde 10.0.2.0/24 gewählt, die Server haben also eine Adresse zwischen 10.0.2.0 und 10.0.2.255, während die 10.0.0.01 für den Router benutzt wird. Die Server haben alle eine festgelegte IP-Adresse, die innerhalb der Server und bei dem Router festgeschrieben wird.
+
+
+\subsection{Das Server-Netzwerk}
+Das Server-Netzwerk ist für die Bereitstellung von Daten und Diensten innerhalb der Fakultät zuständig. Zur Sicherheit sollten keine Daten aus diesem Subnetz direkt den Dark-Fiber-Router passieren, sondern maximal über einen Server der DMZ abgefragt werden und dann weitergeleitet werden.
+
+Das Netzwerk enthält den für den AAA-Services benötigten Server, die benötigten Datenbanken, die Incinga-Instanz, sowie den Foreman-Server. Außerdem können spezifische weitere Services, wie die GitLab-Datenbank, in dem Netz realisiert werden.
+
+Die AAA-Services können zum Beispiel über das RADIUS-Protokoll realisiert werden, das auch mit einer Authentifizierung über PAM erweitert kann und kann deshalb einfach mit den Linux-Clients realisiert werden.
+
+Die Datenbanken sind ebenfalls in diesem Netzwerk realsiert, sind aber nur über die Server zu erreichen. Von den Datenbanken werden regelmäßig Backups angefertigt, die einerseits als unabhängig vom Netzwerk gelagert werden.
+
+Zusätzlich ist im Server-Netzwerk ein Administrations-Rechner, der zur Verfügung steht, sollte die Verbindung zu dem Netzwerk über das Kern-Netzwerk abbrechen.
+
+\subsection{Das Client-Netzwerk}
 Die Rechner der Angestellten der Fakultät, sowie der Studierenden der Fakultät, sind alle über das Client-Netzwerk verbunden. Die Administration erfolgt ebenfalls über einen Rechner im Client-Netz oder über den Administrations-Rechner im Server-Netzwerk.
 
+Auf den Computern des Client-Netzwerkes ist das Betriebssystem Ubuntu-Linux installiert, sollte jedoch aufgrund von benötigter Software ein anderes Betriebssystem benötigt werden, kann das auch realisiert werden. Dabei wird Ubuntu genutzt, da es eine einfache Benutzung ermöglicht, eine große Auswahl an Software bietet und außerdem stabil ist. Außerdem wird die Administration über die kommerzielle Software Landscape von Canonical erleichtert.
+
+\section{Werkzeuge}
 Generell soll das Netzwerk durch das Tool \href{www.theforeman.org}{Foreman} gemanaged werden. Foreman ermöglicht die Administration von Hosts und kann auch für die Administration von großen Netzwerken samt Routern, Clients und Servern genutzt werden. Über eine Web-Oberfläche wird es ermöglicht einen Überblick zu behalten, sowie die Provisionierung und die Konfiguration abzuwickeln.
 Das Administrationstool wickelt die Konfiguration eigentlich über Puppet ab, kann jedoch durch Plugins erweitert werden, wie dem Ansible-Plugin. 
+
+Ansible soll anstatt des in Foreman integrierten Puppet für die Konfiguration der Server genutzt werden. Die Konfigurationen der einzelnen Komponenten werden als playbooks angelegt und abgespeichert.
 
 Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kann zusätzlich das kommerzielle Management-Tool Landscape von Canonical benutzt werden. Es ermöglicht eine einfache Administration verschiedener Instanzen und kann die Auslastung, Zustand der Hardware und den Sicherheitszustand anzeigen. Landscape basiert aus einer Agent-Architektur, erfordern also einen Client auf den zu verwaltenden Rechnern.
 
@@ -54,14 +67,16 @@ Das Konfigurationsmanagement wird über Ansible abgewicklet. Dabei werden die ei
 Durch eine Integration von Ansible in Foreman über das dazugehörige Plugin kann die Ausführung von playbooks einfach umgesetzt werden, sowie die Ausführung überwacht werden. Die Ergebnisse der Ausführung werden bei Foreman je Host aufgelistet.
 
 \subsection{Administration and Accounting Management}
-''Administration and Accounting Management'' beinhaltet das Management der Accounts und der für die Abrechnung benötigten Nutzungsdaten. Das beinhaltet die AAA-Services. Die Nutzenden werden dafür in verschiedene Gruppen mit dazugehörigen Zugriffsrechten eingeteilt. Zusätzlich gibt es für jede Gruppe noch eine zusätzliche Gruppe in der Nutzende eingeteilt werden, die zusätzliche Rechte erhalten. Sollte eine Studentin z.B. zusätzliche Rechte benötigen, weil sie im Fachschaftsrat ist und dort die Website, die auf Fakultätsservern liegt, betreut, erhält zusätzliche Rechte, aber wird dafür nicht in die Gruppe der Website-Administrierenden aufgenommen.
+''Administration and Accounting Management'' beinhaltet das Management der Accounts und der für die Abrechnung benötigten Nutzungsdaten. Das beinhaltet die AAA-Services, die z.B. über das RADIUS-Protokoll realisiert werden können. 
 
+Für das Accounting-Management, sowie die Nutzenden-Verwaltung muss ein Konzept erstellt werden, wie die Verwaltung geschieht und wie die (Zugriffs-)Rechte realisiert und zugeteilt werden können. Grundlegend kann die Zuteilung über Gruppen realisiert werden, in die die Nutzenden je nach ihrem Aufgabengebiet eingeteilt werden. Zusätzliche Rechte können auch verteilt werden.
 
 \subsection{Performance Management}
 ''Performance Management'' bedeutet die Überwachung der Performance aller Komponenten des Netzwerkes. Dabei muss die Auslastung der Server, die Gesundheit und das Alter von Festplatten und anderen (Netzwerk-)Komponenten überwacht werden.
 
-Grundlegendes Performanmce-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine grundlegende Überwachung ermöglichen. 
+Grundlegendes Performanmce-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine Überwachung ermöglichen. 
 Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
+
 
 \subsection{Security Management}
 Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst zu sein und diese so gut wie möglich zu verbessern. Das beinhaltet die physische, sowie die digitale Sicherheit.
@@ -70,10 +85,10 @@ Die physische Sicherheit wird unter Anderem durch eine Zugangskontrolle zu den R
 
 Die digitale Sicherheit kann unter Anderem durch IPSec realisiert werden, außerdem muss ein Überblick über wichtige Sicherheits-Updates beibehalten werden und diese durch das Konfigurations-Management aufgespielt werden.
 
-Die Authorisierung für die Dienste und das Netzwerk wird über den AAA-Server realisiert.
+Die Authorisierung für die Dienste und das Netzwerk wird über den AAA-Server realisiert. Dabei wird strengstens darauf geachtet, dass die einzelnen Gruppen möglichst wenig Rechte haben, das erordert zwar einen erhöhten Administrationsaufwand, verbessert aber auch die Sicherheit des Netzwerkes.
 
-Alle über das Internet erreichbaren Dienste können nur über https erreicht werden, während bestimmte Dienste, wie ein File-Server, nur über ein VPN erreichbar sind.
+Alle über das Internet erreichbaren Dienste können nur über https erreicht werden.
 
-Außerdem wird der Zugriff auf z.B. das Server-Netzwerk aus dem Internet eingeschränkt. Die es kann nur aus dem Client-Netzwerk und der DMZ auf Daten, die auf diesen Servern liegen zugegriffen werden. Außerdem werden über die beiden Firewalls die Zugriffe zusätzlich beschränkt und verschiedenen IP-Adressen geblockt.
+Außerdem wird der Zugriff auf z.B. das Server-Netzwerk aus dem Internet eingeschränkt. Es soll nur möglich sein aus dem Client-Netzwerk und der DMZ auf Daten, die auf diesen Servern liegen, zugegriffen werden. Außerdem werden über die beiden Firewalls die Zugriffe zusätzlich beschränkt und verschiedenen IP-Adressen geblockt.
 
 Über Landscape kann überwacht werden, welche Sicherheits-Updates die Software, die auf den Rechnern installiert ist, noch ausstehend sind.
