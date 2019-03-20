@@ -2,7 +2,10 @@
 
 Für die Umsetzung musste statt dem originalen Netkit Netkit-ng genutzt werden, welches python2.7 unterstützt, das für Ansible benötigt wird. Ein Update der Netkit-Instanzen auf python2.7 war auf Grund des Alters des File-Systems nicht möglich.
 
-Es wurde eine wie in \ref{fig:model} Topologie erzeugt und über statische Routen eine grundlegende Netzwerk-Kommunikation ermöglicht. Die virtuellen Maschine, die mit ''r'' enden, sind die Router, die die Herzstücke des Netzwerkes bzw. der Subnetzwerke darstellen. Außerdem fangen die Namen der Maschinen mit dem jeweiligen Subnetzwerk an, zu dem sie gehören. So ist ''server-r'' der Router des Server-Netzwerkes, während ''server-foreman'' der Foreman-Server im Server-Netzwerk ist.
+Es wurde eine wie in \ref{fig:model} Topologie erzeugt und über statische Routen, die in den .startup-Skripten festgelegt werden, eine grundlegende Netzwerk-Kommunikation ermöglicht. 
+Die virtuellen Maschine, die mit ''r'' enden, sind die Router, die die Herzstücke des Netzwerkes bzw. der Subnetzwerke darstellen. 
+Außerdem fangen die Namen der Maschinen mit dem jeweiligen Subnetzwerk an, zu dem sie gehören. 
+So ist ''server-r'' der Router des Server-Netzwerkes, während ''server-foreman'' der Foreman-Server im Server-Netzwerk ist.
 
 Die virtuellen Maschinen kriegen zusätzlich einen Arbeitsspeicher von 256 MB, um die Installation von Programmen zu ermöglichen.
 
