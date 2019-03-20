@@ -18,7 +18,7 @@ Außerdem werden die einzelnen Netzwerk-Anschlüsse aufgelistet. Die TAP-Verbind
 Über das Kern-Subnetz werden für alle Subnetze eine Verbindung zu jeweils anderen Subnetzen zur Verfügung gestellt, sowie auch die Verbindung zum Internet. Die Verbindung wird über statische Routen ermöglicht, die beim Startup angelegt werden.
 
 \section{DMZ}
-In der DMZ, also der demilitarisierten Zone, stehen die Server, die über das Internet erreichbar sein sollen. Dementsprechend ist der Web-Auftritt der Fakultät, sowie der Mail-Server und verschiedenen andere Dienste in der DMZ vertreten, sowie auch der DNS-Server.
+In der DMZ, also der demilitarisierten Zone, stehen die Server, die über das Internet erreichbar sein sollen. Dementsprechend ist der Web-Auftritt der Fakultät, sowie der Mail-Server und verschiedenen andere Dienste in der DMZ vertreten, sowie auch ein DNS-Server.
 
 \section{Server-Subnetz}
 In dem Server-Subnetz sind die verschiedenen Server der Fakultät enthalten, die für Datenspeicherung und Datenverarbeitung benötigt werden. Außerdem sind die Server, die für die Administration des Netzwerkes benötigt werden, wie die Icinga-Instanz und der Foreman-Server, ebenfalls in diesem Netzwerk vertreten. Auf sie kann über den Computer in dem Subnetz zugegriffen werden oder über Computer aus den anderen Subnetzen, jedoch nicht direkt über den Darkfiber-Router.
@@ -27,3 +27,8 @@ In dem Server-Subnetz sind die verschiedenen Server der Fakultät enthalten, die
 Das Client-Subnetz ist mit dem Kern-Subnetz verbunden und kann über den Kern-Router eine Verbindung zu den anderen Subnetzen und zu dem Server aufbauen. Zu dem Client-Subnetz gehören einerseits alle fest verbauten Computer der Computer-Pools, sowie die Computer der Lehrenden und der weiteren Angestellten. Außerdem sind verschiedenen Wireless-Access-Points auch mit diesem Netzwerk verbunden, darüber können die Studierenden sich mit dem Internet verbinden.
 
 \section{Ausblick}
+Bei der Implementation war es nicht möglich alles zu realisieren. Einerseits liegt das an der Version des Netkit-File-Systems, welches nur Debian wheezy unterstützt und eine Erweiterung nicht im Bearbeitungszeitraum möglich war. Andererseits wurde kommerzielle Software im Konzept zur Nutzung vorgeschlagen, die nicht in der Realisierung genutzt werden konnte.
+
+Außerdem war die ausführliche Nutzung von Foreman aufgrund der Virtualisierung nicht möglich.
+
+Des Weiteren war es aufgrund der Größe des konzipierten Netzwerkes nicht möglich alle Dienste zu realisieren.

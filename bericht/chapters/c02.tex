@@ -70,7 +70,7 @@ Fault-Management bedeutet das frühzeitige Erkennen und Beheben von Fehlern inne
 
 Foreman überprüft die Anwesenheit und Funktionalität von Hosts durch puppet-nodes, außerdem kann durch ein Plugin zentralisiertes Logging umgesetzt werden. Sollte ein Fehler auftreten, der unter eine bestimmte Einstufung, wie z.B. ''kritisch'' fällt, kann eine Benachrichtigung gesendet werden, außerdem wird auch ein vereinfachtes Handeln unterstützt, solange eine Verbindung zum Host besteht, können Logs abgerufen werden, Konfigurationen erneut angewendet werden oder Updates gefahren werden.
 
-Für ein übersichtliches Logging müssen die Logs in verschiedene Stufen eingeteilt werden. Es empfiehlt sich, diese einerseits nach Gefahr für die weitere Funktionalität einzuteilen, wie auch in die verschiedene Komponenten. So können Logs, wie ''critical: infrastructure: lost connection to mail-server'' schnell verstanden werden.
+Für ein übersichtliches Logging müssen die Logs in verschiedene Stufen eingeteilt werden. Es empfiehlt sich, diese einerseits nach Gefahr für die weitere Funktionalität einzuteilen, wie auch in die verschiedene Komponenten. So können Logs, wie z.B. ''critical: infrastructure: lost connection to mail-server'' schnell verstanden werden.
 
 \subsection{Configuration Management}
 Das Konfigurationsmanagement wird über Ansible abgewickelt. Dabei werden die einzelnen benötigten Dienste als Konfigurationen in playbooks angelegt, die einen entsprechenden Namen haben, sollte ein Host ausfallen, kann in der host-Datei ein neuer Host der entsprechenden Gruppe hinzugefügt werden. Theoretisch können die Konfigurationen der Router ebenfalls über playbooks abgespeichert werden. 
@@ -78,7 +78,7 @@ Das Konfigurationsmanagement wird über Ansible abgewickelt. Dabei werden die ei
 Durch eine Integration von Ansible in Foreman über das dazugehörige Plugin kann die Ausführung von playbooks einfach umgesetzt werden, sowie die Ausführung überwacht werden. Die Ergebnisse der Ausführung werden bei Foreman je Host aufgelistet.
 
 \subsection{Administration and Accounting Management}
-''Administration and Accounting Management'' beinhaltet das Management der Accounts und der für die Abrechnung benötigten Nutzungsdaten. Das beinhaltet die AAA-Services, die z.B. über das RADIUS-Protokoll realisiert werden können. 
+''Administration and Accounting Management'' beinhaltet das Management der Accounts und der für die Abrechnung benötigten Nutzungsdaten. Das beinhaltet die AAA-Services, die z.B. über das RADIUS-Protokoll realisiert werden können. Die AAA-Services beinhalten Authentication, Authorization and Accounting. Damit ist einerseits eine Überprüfung der Identität des bzw. der Nutzenden möglich und dementsprechend auch eine Gewährung der Zugriffsrechte und andererseits eine Abrechnung der genutzten Dienste.
 
 Für das Accounting-Management, sowie die Nutzenden-Verwaltung muss ein Konzept erstellt werden, wie die Verwaltung geschieht und wie die (Zugriffs-)Rechte realisiert und zugeteilt werden können. Grundlegend kann die Zuteilung über Gruppen realisiert werden, in die die Nutzenden je nach ihrem Aufgabengebiet eingeteilt werden. Zusätzliche Rechte können auch verteilt werden.
 
@@ -88,18 +88,24 @@ Für das Accounting-Management, sowie die Nutzenden-Verwaltung muss ein Konzept 
 Grundlegendes Performance-Monitoring kann über Landscape abgewickelt werden, aber auch die Icinga-Instanz kann eine Überwachung ermöglichen. 
 Der Foreman-Server kann ähnliche Daten wie die Icinga-Instanz bereitstellen.
 
+Das Performance-Management ermöglicht außerdem Hilfe bei den Teilen Fault Management und Security Management, da eine ungewöhnliche Auslastung verschiedener Bestandteile ein Indiz für ein Problem sein kann.
+
 \newpage
 \subsection{Security Management}
 Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst zu sein und diese so gut wie möglich zu verbessern. Das beinhaltet die physische, sowie die digitale Sicherheit.
 
-Die physische Sicherheit wird unter Anderem durch eine Zugangskontrolle zu den Räumen in denen die Server stehen erreicht. Jedoch werden noch weitere Schritte benötigt.
+Das Security Management dient dem Schutz der Daten und Programme innerhalb des Netzwerkes.
+
+Die physische Sicherheit kann grundlegend durch eine Zugangskontrolle zu den Räumen in denen die Server stehen erreicht. Jedoch werden noch weitere Schritte benötigt.
 
 Die digitale Sicherheit kann unter Anderem durch IPSec realisiert werden, außerdem muss ein Überblick über wichtige Sicherheits-Updates beibehalten werden und diese durch das Konfigurations-Management aufgespielt werden.
 
 Die Authorisierung für die Dienste und das Netzwerk wird über den AAA-Server realisiert. Dabei wird strengstens darauf geachtet, dass die einzelnen Gruppen möglichst wenig Rechte haben, das erfordert zwar einen erhöhten Administrationsaufwand, verbessert aber auch die Sicherheit des Netzwerkes.
 
-Alle über das Internet erreichbaren Dienste können nur über https erreicht werden.
+Ein weitere Möglichkeit das Netzwerk zu sichern ist die Verschlüsselung des gesamten Traffics. So ist es wichtig, TLS auch innerhalb des Netzwerkes zu nutzen.
 
 Außerdem wird der Zugriff auf z.B. das Server-Netzwerk aus dem Internet eingeschränkt. Es soll nur möglich sein aus dem Client-Netzwerk und der DMZ auf Daten, die auf diesen Servern liegen, zugegriffen werden. Außerdem werden über die beiden Firewalls die Zugriffe zusätzlich beschränkt und verschiedenen IP-Adressen geblockt.
 
 Über Landscape kann überwacht werden, welche Sicherheits-Updates die Software, die auf den Rechnern installiert ist, noch ausstehend sind.
+
+Zusätzlich sollte eine einfache Möglichkeit bereitgestellt werden, die Administrierenden zu kontaktieren, wenn eine Sicherheitslücke gefunden wird.
