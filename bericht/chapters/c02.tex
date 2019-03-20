@@ -19,7 +19,7 @@ Die DMZ stellt alle Dienste bereit, die über das Internet erreichbar sein solle
 
 In der DMZ ist ein FTP-Server, der Daten aus dem Server-Netzwerk abfragt, der Web-Server, der Mail-Server, der genau so, wie der FTP-Server die Daten auch von Servern des Server-Netzwerkes nachlädt und ein DNS-Server. Eine GitLab-Instanz kann ebenfalls hier positioniert werden.
 
-Als IP-Adress-Bereich wurde 10.0.2.0/24 gewählt, die Server haben also eine Adresse zwischen 10.0.2.0 und 10.0.2.255, während die 10.0.0.01 für den Router benutzt wird. Die Server haben alle eine festgelegte IP-Adresse, die innerhalb der Server und bei dem Router festgeschrieben wird.
+Als IP-Adress-Bereich wurde 10.0.2.0/24 gewählt, die Server haben also eine Adresse zwischen 10.0.2.0 und 10.0.2.255, während die 10.0.2.01 für den Router benutzt wird. Die Server haben alle eine festgelegte IP-Adresse, die innerhalb der Server und bei dem Router festgeschrieben wird.
 
 
 \subsection{Das Server-Netzwerk}
@@ -33,10 +33,14 @@ Die Datenbanken sind ebenfalls in diesem Netzwerk realsiert, sind aber nur über
 
 Zusätzlich ist im Server-Netzwerk ein Administrations-Rechner, der zur Verfügung steht, sollte die Verbindung zu dem Netzwerk über das Kern-Netzwerk abbrechen.
 
+Als IP-Adress-Bereich wurde 10.0.3.0/24 gewählt, die Server haben dementsprechend eine Adresse zwischen 10.0.3.0 und 10.0.3.255, während die 10.0.3.01, ähnlich wie in der DMZ, für den Router benutzt wird. Die Server und Datenbanken haben alle eine festgelegte IP-Adresse, die innerhalb der Server und bei dem Router festgeschrieben wird.
+
 \subsection{Das Client-Netzwerk}
 Die Rechner der Angestellten der Fakultät, sowie der Studierenden der Fakultät, sind alle über das Client-Netzwerk verbunden. Die Administration erfolgt ebenfalls über einen Rechner im Client-Netz oder über den Administrations-Rechner im Server-Netzwerk.
 
 Auf den Computern des Client-Netzwerkes ist das Betriebssystem Ubuntu-Linux installiert, sollte jedoch aufgrund von benötigter Software ein anderes Betriebssystem benötigt werden, kann das auch realisiert werden. Dabei wird Ubuntu genutzt, da es eine einfache Benutzung ermöglicht, eine große Auswahl an Software bietet und außerdem stabil ist. Außerdem wird die Administration über die kommerzielle Software Landscape von Canonical erleichtert.
+
+Bei diesem Subnetz wurde der IP-Adress-Bereich 10.0.4.0/24 genutzt, die Adressen variieren dementsprechend zwischen 10.0.4.0 und 10.0.4.255, während auch hier der Router die Adresse 10.0.4.01 hat. Während die von der Fakultät gestellten Computer eine feste IP-Adresse haben, werden den zusätzlichen Geräten, die z.B. über eduroam verbunden werden, eine zufällige IP-Adresse zugewiesen, da eine feste Zuweisung auf Grund der Masse der möglichen Geräte, nicht realisierbar ist.
 
 \section{Werkzeuge}
 Generell soll das Netzwerk durch das Tool \href{www.theforeman.org}{Foreman} gemanaged werden. Foreman ermöglicht die Administration von Hosts und kann auch für die Administration von großen Netzwerken samt Routern, Clients und Servern genutzt werden. Über eine Web-Oberfläche wird es ermöglicht einen Überblick zu behalten, sowie die Provisionierung und die Konfiguration abzuwickeln.
