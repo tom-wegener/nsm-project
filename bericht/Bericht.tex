@@ -32,7 +32,12 @@
 \subtitle{Netzwerk- und Service-Struktur einer Fakultät}
 \date{\today}
 \author{Tom Wegener, 18INM/TZ}
-
+\pretitle{%
+  \begin{center}
+  \LARGE
+  \includegraphics[width=6cm]{pictures/htwk-logo.jpg}\\[\bigskipamount]
+}
+\posttitle{\end{center}}
 
 \geometry{a4paper, left=30mm, right=20mm,top=25mm,bottom=25mm}
   \fancyhead{}
@@ -49,6 +54,7 @@
 \pagestyle{empty}
 
 \maketitle
+%\includegraphics[width=5cm]{pictures/htwk-logo.jpg}
 
 \newpage
 
@@ -64,6 +70,6 @@
 \include{chapters/c02}
 \include{chapters/c03}
 \include{chapters/c04}
-\include{chapters/anhang}
+%\include{chapters/anhang}
 
 \end{document}
