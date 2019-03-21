@@ -2,20 +2,20 @@
 
 Für die Umsetzung musste statt dem originalen Netkit Netkit-ng genutzt werden, welches python2.7 unterstützt, das für Ansible benötigt wird. Ein Update der Netkit-Instanzen auf python2.7 war auf Grund des Alters des File-Systems nicht möglich.
 
-Es wurde eine wie in \ref{fig:model} Topologie erzeugt und über statische Routen, die in den .startup-Skripten festgelegt werden, eine grundlegende Netzwerk-Kommunikation ermöglicht. 
+Es wurde eine wie in der Abbildung \ref{fig:model} dargestellte Netzwerk-Topologie erzeugt und über statische Routen, die in den .startup-Skripten festgelegt werden, eine grundlegende Netzwerk-Kommunikation ermöglicht. 
 Die virtuellen Maschine, die mit ''r'' enden, sind die Router, die die Herzstücke des Netzwerkes bzw. der Subnetzwerke darstellen. 
 Außerdem fangen die Namen der Maschinen mit dem Subnetzwerk an, zu dem sie gehören. 
 So ist ''server-r'' der Router des Server-Netzwerkes, während ''server-foreman'' der Foreman-Server im Server-Netzwerk ist.
 
 Die virtuellen Maschinen kriegen zusätzlich einen Arbeitsspeicher von 256 MB, um die Installation von Programmen zu ermöglichen.
 
-Außerdem werden die einzelnen Netzwerk-Anschlüsse aufgelistet. Die TAP-Verbindung wird bei der ''darkfiber-r''-VM außerdem auch in der lab.conf festgelegt.
+Zusätzlich werden die einzelnen Netzwerk-Anschlüsse aufgelistet. Die TAP-Verbindung wird bei der ''darkfiber-r''-VM außerdem auch in der lab.conf festgelegt.
 
 \section{Darkfiber}
 Über die VM ''darkfiber-r'' wird eine Internet-Anbindung realisiert, wie sie in den Anforderungen gefordert wird. Die VM hat drei Anschlüsse, einer ist die Verbindung zu dem Internet bzw. die Dark-Fiber-Anbindung, die zweite Leitung führt zu dem Kern-Subnetzwerk, während die dritte Leitung zu der demilitarisierten Zone führt.
 
 \section{Kern-Subnetz}
-Über das Kern-Subnetz werden für alle Subnetze eine Verbindung zu jeweils anderen Subnetzen zur Verfügung gestellt, sowie auch die Verbindung zum Internet. Die Verbindung wird über statische Routen ermöglicht, die beim Startup angelegt werden.
+Über das Kern-Subnetz werden für alle Subnetze eine Verbindung zu jeweils anderen Subnetzen zur Verfügung gestellt, sowie auch die Verbindung zum Internet. Diese Verbindungen werden über statische Routen ermöglicht, die beim Startup angelegt werden.
 
 \section{DMZ}
 In der DMZ, also der demilitarisierten Zone, stehen die Server, die über das Internet erreichbar sein sollen. Dementsprechend ist der Web-Auftritt der Fakultät, sowie der Mail-Server und verschiedenen andere Dienste in der DMZ vertreten, sowie auch ein DNS-Server.

@@ -1,6 +1,6 @@
 \chapter{Konzept}
 
-Für das Netzwerk-Konzept wurde eine Struktur mit mehreren getrennten Subnetzen gewählt, das eine einfache Administration gewährleistet, eine Erweiterung erleichtert und es erleichtert sicherheits-relevante Änderungen schnell umzusetzen. Im Kapitel Netzwerke und Sub-Netzwerke wird auf die Struktur eingegangen, während im Kapitel Werkzeuge die benötigte Software kurz vorgestellt wird und im Kapitel FCAPS die Nutzung genauer erläutert wird.
+Für das Netzwerk-Konzept wurde eine Struktur mit mehreren getrennten Subnetzen gewählt, die eine einfache Administration gewährleistet und eine Erweiterung erleichtert. Es erleichtert zusätzlich die schnelle Umsetzung sicherheitsrelevante Änderungen. Im Kapitel Netzwerke und Sub-Netzwerke wird auf die Struktur eingegangen, während im Kapitel Werkzeuge die benötigte Software kurz vorgestellt und im Kapitel FCAPS die Nutzung genauer erläutert wird.
 
 \section{Netzwerke und Sub-Netzwerke}
 Die Infrastruktur besteht grundlegend aus drei Subnetzen, sowie einem großen Netzwerk. Die Verbindung der Subnetze wird über das Kern-Netzwerk bzw. den Kern-Router ermöglicht. Zusätzlich zu dem Kern-Router hat jedes Subnetzwerk einen Router und der Anschluss über die Dark-Fiber-Leitung wird auch über einen Router realisiert. Die drei Subnetzwerke sind die demilitarisierte Zone (DMZ), das Server-Netzwerk und das Client-Netzwerk.
@@ -17,22 +17,22 @@ In der Abbildung ist pro Netzwerk nur ein Router eingezeichnet, um die Übersich
 \subsection{Das Kern-Netzwerk}
 Das Kern-Netzwerk enthält die Router, die dafür zuständig sind, den Traffic der gesamten Infrastruktur abzuwickeln. Ausgenommen davon sind Zugriffe auf die Server der DMZ, die aus dem Internet heraus bzw. über die Dark-Fiber-Verbindung getätigt werden.
 
-Die Routen werden statisch festgelegt und die Router wissen von den einzelnen Subnetzwerken und können dementsprechend den Traffic unterscheiden. Die Router der einzelnen Subnetzwerke wissen nur von den Adressen in dem jeweiligen Sub-Netzwerk und können nur zwischen Traffic für das eigene Netzwerk und die restliche Infrastruktur unterscheiden.
+Die Routen werden statisch festgelegt und die Router wissen von den einzelnen Subnetzwerken und können dementsprechend den Traffic unterscheiden. Die Router der einzelnen Subnetzwerke wissen nur von den Adressen in dem jeweiligen Subnetzwerk und können nur zwischen Traffic für das eigene Subnetzwerk und der restliche Infrastruktur unterscheiden.
 
 \subsection{Die Demilitarisierte Zone}
-Die DMZ stellt alle Dienste bereit, die über das Internet erreichbar sein sollen, also einen Web-Server, einen Mail-Server und einen AAA-Server. Jedoch werden kritische Daten nicht auf Servern in der DMZ gespeichert, sondern sind auf Servern in dem Server-Netzwerk gespeichert, die jedoch über Server aus der DMZ erreichbar sind.
+Die DMZ stellt alle Dienste bereit, die über das Internet erreichbar sein sollen, also einen Web-Server, einen Mail-Server und einen AAA-Server. Jedoch werden kritische Daten nicht auf Servern in der DMZ gespeichert, sondern sind auf Datenbank-Servern in dem Server-Netzwerk gespeichert, die über Server aus der DMZ erreichbar sind.
 
-In der DMZ ist ein FTP-Server, der Daten aus dem Server-Netzwerk abfragt, der Web-Server, der Mail-Server, der genau so, wie der FTP-Server die Daten auch von Servern des Server-Netzwerkes nachlädt und ein DNS-Server. Eine GitLab-Instanz kann ebenfalls hier positioniert werden.
+In der DMZ sind ein FTP-Server, der Daten aus dem Server-Netzwerk abfragt, der Web-Server, der Mail-Server, der genau so, wie der FTP-Server die Daten auch von Servern des Server-Netzwerkes nachlädt und ein DNS-Server. Eine GitLab-Instanz kann ebenfalls hier positioniert werden.
 
 Als IP-Adress-Bereich wurde 10.0.2.0/24 gewählt, die Server haben also eine Adresse zwischen 10.0.2.0 und 10.0.2.255, während die 10.0.2.01 für den Router benutzt wird. Die Server haben alle eine festgelegte IP-Adresse, die innerhalb der Server und bei dem Router festgeschrieben wird.
 
 
 \subsection{Das Server-Netzwerk}
-Das Server-Netzwerk ist für die Bereitstellung von Daten und Diensten innerhalb der Fakultät zuständig. Zur Sicherheit sollten keine Daten aus diesem Subnetz direkt den Dark-Fiber-Router passieren, sondern maximal über einen Server der DMZ abgefragt werden und dann weitergeleitet werden.
+Das Server-Netzwerk ist für die Bereitstellung von Daten und Diensten innerhalb der Fakultät zuständig. Zur Sicherheit sollten keine Daten aus diesem Subnetz direkt den Dark-Fiber-Router passieren, sondern maximal über einen Server der DMZ abgefragt und dann weitergeleitet werden.
 
 Das Netzwerk enthält den für den AAA-Services benötigten Server, die benötigten Datenbanken, die Icinga-Instanz, sowie den Foreman-Server. Außerdem können spezifische weitere Services, wie die GitLab-Datenbank, in dem Netz realisiert werden.
 
-Die AAA-Services können zum Beispiel über das RADIUS-Protokoll realisiert werden, das auch mit einer Authentifizierung über PAM erweitert kann und kann deshalb einfach mit den Linux-Clients realisiert werden.
+Die AAA-Services können zum Beispiel über das RADIUS-Protokoll realisiert werden, das auch mit einer Authentifizierung über PAM erweitert werden kann und kann deshalb einfach mit den Linux-Clients realisiert werden.
 
 Die Datenbanken sind ebenfalls in diesem Netzwerk realisiert, sind aber nur über die Server zu erreichen. Von den Datenbanken werden regelmäßig Backups angefertigt, die einerseits als unabhängig vom Netzwerk gelagert werden.
 
@@ -43,9 +43,9 @@ Als IP-Adress-Bereich wurde 10.0.3.0/24 gewählt, die Server haben dementspreche
 \subsection{Das Client-Netzwerk}
 Die Rechner der Angestellten der Fakultät, sowie der Studierenden der Fakultät, sind alle über das Client-Netzwerk verbunden. Die Administration erfolgt ebenfalls über einen Rechner im Client-Netz oder über den Administrations-Rechner im Server-Netzwerk.
 
-Auf den Computern des Client-Netzwerkes ist das Betriebssystem Ubuntu-Linux installiert, sollte jedoch aufgrund von benötigter Software ein anderes Betriebssystem benötigt werden, kann das auch realisiert werden. Dabei wird Ubuntu genutzt, da es eine einfache Benutzung ermöglicht, eine große Auswahl an Software bietet und außerdem stabil ist. Außerdem wird die Administration über die kommerzielle Software Landscape von Canonical erleichtert.
+Auf den Computern des Client-Netzwerkes ist das Betriebssystem Ubuntu-Linux installiert. Sollte jedoch aufgrund von benötigter Software ein anderes Betriebssystem benötigt werden, kann das auch realisiert werden. Dabei wird Ubuntu genutzt, da es eine einfache Benutzung ermöglicht, eine große Auswahl an Software bietet und außerdem stabil ist. Die Administration wird über die kommerzielle Software Landscape von Canonical erleichtert.
 
-Bei diesem Subnetz wurde der IP-Adress-Bereich 10.0.4.0/24 genutzt, die Adressen variieren dementsprechend zwischen 10.0.4.0 und 10.0.4.255, während auch hier der Router die Adresse 10.0.4.01 hat. Während die von der Fakultät gestellten Computer eine feste IP-Adresse haben, werden den zusätzlichen Geräten, die z.B. über eduroam verbunden werden, eine zufällige IP-Adresse zugewiesen, da eine feste Zuweisung auf Grund der Masse der möglichen Geräte, nicht realisierbar ist.
+Bei diesem Subnetz wurde der IP-Adress-Bereich 10.0.4.0/24 genutzt, die Adressen variieren dementsprechend zwischen 10.0.4.0 und 10.0.4.255, während auch hier der Router die Adresse 10.0.4.01 hat. Die von der Fakultät gestellten Computer haben eine feste IP-Adresse, den zusätzlichen Geräten, die z.B. über eduroam verbunden werden, wird eine zufällige IP-Adresse zugewiesen, da eine feste Zuweisung auf Grund der Masse der möglichen Geräte, nicht realisierbar ist.
 
 \section{Werkzeuge}
 Generell soll das Netzwerk durch das Tool \href{www.theforeman.org}{Foreman} administriert werden. Foreman ermöglicht die Administration von Hosts und kann auch für die Administration von großen Netzwerken samt Routern, Clients und Servern genutzt werden. Über eine Web-Oberfläche wird es ermöglicht einen Überblick zu behalten, sowie die Provisionierung und die Konfiguration abzuwickeln.
@@ -53,7 +53,7 @@ Das Administrationstool wickelt die Konfiguration eigentlich über Puppet ab, ka
 
 Ansible soll anstatt des in Foreman integrierten Puppet für die Konfiguration der Server genutzt werden. Die Konfigurationen der einzelnen Komponenten werden als playbooks angelegt und abgespeichert.
 
-Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kann zusätzlich das kommerzielle Management-Tool Landscape von Canonical benutzt werden. Es ermöglicht eine einfache Administration verschiedener Instanzen und kann die Auslastung, Zustand der Hardware und den Sicherheitszustand anzeigen. Landscape basiert aus einer Agent-Architektur, erfordern also einen Client auf den zu verwaltenden Rechnern.
+Sollte die Software kein anderes Betriebssystem als Ubuntu-Server benötigen kann zusätzlich das kommerzielle Management-Tool Landscape von Canonical benutzt werden. Es ermöglicht eine einfache Administration verschiedener Instanzen und kann die Auslastung, Zustand der Hardware und den Sicherheitszustand anzeigen. Landscape  erfordert einen Client auf den zu verwaltenden Rechnern.
 
 Außerdem können Foreman und Landscape auch bei der Realisierung von FCAPS helfen.
 
@@ -68,12 +68,12 @@ Es wurde sich bewusst für FCAPS entschieden und nicht für FAB oder ITIL, da FC
 \subsection{Fault-Management}
 Fault-Management bedeutet das frühzeitige Erkennen und Beheben von Fehlern innerhalb des Netzwerkes, das kann durch z.B. eine Icinga-Instanz realisiert werden. Alternativ kann auch ein anderes Werkzeug, wie z.B. Foreman, genutzt werden, welches mehrere Teile von FCAPS in sich vereinigt.
 
-Foreman überprüft die Anwesenheit und Funktionalität von Hosts durch puppet-nodes, außerdem kann durch ein Plugin zentralisiertes Logging umgesetzt werden. Sollte ein Fehler auftreten, der unter eine bestimmte Einstufung, wie z.B. ''kritisch'' fällt, kann eine Benachrichtigung gesendet werden, außerdem wird auch ein vereinfachtes Handeln unterstützt, solange eine Verbindung zum Host besteht, können Logs abgerufen werden, Konfigurationen erneut angewendet werden oder Updates gefahren werden.
+Foreman überprüft die Anwesenheit und Funktionalität von Hosts durch puppet-nodes, außerdem kann durch ein Plugin zentralisiertes Logging umgesetzt werden. Sollte ein Fehler auftreten, der unter eine bestimmte Einstufung, wie z.B. ''kritisch'' fällt, kann eine Benachrichtigung gesendet werden. Außerdem wird auch ein vereinfachtes Handeln unterstützt. Solange eine Verbindung zum Host besteht, können Logs abgerufen, Konfigurationen erneut angewendet oder Updates installiert werden.
 
 Für ein übersichtliches Logging müssen die Logs in verschiedene Stufen eingeteilt werden. Es empfiehlt sich, diese einerseits nach Gefahr für die weitere Funktionalität einzuteilen, wie auch in die verschiedene Komponenten. So können Logs, wie z.B. ''critical: infrastructure: lost connection to mail-server'' schnell verstanden werden.
 
 \subsection{Configuration Management}
-Das Konfigurationsmanagement wird über Ansible abgewickelt. Dabei werden die einzelnen benötigten Dienste als Konfigurationen in playbooks angelegt, die einen entsprechenden Namen haben, sollte ein Host ausfallen, kann in der host-Datei ein neuer Host der entsprechenden Gruppe hinzugefügt werden. Theoretisch können die Konfigurationen der Router ebenfalls über playbooks abgespeichert werden. 
+Das Konfigurationsmanagement wird über Ansible abgewickelt. Dabei werden die einzelnen benötigten Dienste als Konfigurationen in playbooks angelegt, die einen entsprechenden Namen haben. Sollte ein Host ausfallen, kann in der host-Datei ein neuer Host der entsprechenden Gruppe hinzugefügt werden. Theoretisch können die Konfigurationen der Router ebenfalls über playbooks abgespeichert werden. 
 
 Durch eine Integration von Ansible in Foreman über das dazugehörige Plugin kann die Ausführung von playbooks einfach umgesetzt werden, sowie die Ausführung überwacht werden. Die Ergebnisse der Ausführung werden bei Foreman je Host aufgelistet.
 
@@ -96,9 +96,9 @@ Security Management bedeutet sich über die Sicherheit der Infrastruktur bewusst
 
 Das Security Management dient dem Schutz der Daten und Programme innerhalb des Netzwerkes.
 
-Die physische Sicherheit kann grundlegend durch eine Zugangskontrolle zu den Räumen in denen die Server stehen erreicht. Jedoch werden noch weitere Schritte benötigt.
+Die physische Sicherheit kann grundlegend durch eine Zugangskontrolle zu den Räumen in denen die Server stehen erreicht werden. Jedoch werden noch weitere Schritte benötigt.
 
-Die digitale Sicherheit kann unter Anderem durch IPSec realisiert werden, außerdem muss ein Überblick über wichtige Sicherheits-Updates beibehalten werden und diese durch das Konfigurations-Management aufgespielt werden.
+Die digitale Sicherheit kann unter Anderem durch IPSec realisiert werden, außerdem muss ein Überblick über wichtige Sicherheits-Updates beibehalten und diese durch das Konfigurations-Management aufgespielt werden.
 
 Die Authorisierung für die Dienste und das Netzwerk wird über den AAA-Server realisiert. Dabei wird strengstens darauf geachtet, dass die einzelnen Gruppen möglichst wenig Rechte haben, das erfordert zwar einen erhöhten Administrationsaufwand, verbessert aber auch die Sicherheit des Netzwerkes.
 

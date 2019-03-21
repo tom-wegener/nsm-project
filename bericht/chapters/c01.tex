@@ -1,19 +1,19 @@
 \chapter{Einleitung}
 
-Für das Modul Netzwerk- und System-Management (NSM) sollen die Studierenden des Studiengangs "Informatik Master" der HTWK Leipzig die Infrastruktur einer Fakultät erstellen, die sich außerhalb des Universitäts-netzes befindet.
+Für das Modul Netzwerk- und System-Management (NSM) sollen die Studierenden des Studiengangs ''Informatik Master'' der HTWK Leipzig die Infrastruktur einer Fakultät erstellen, die sich außerhalb des Universitätsnetzes befindet.
 
-Das Projekt soll mit Hilfe von Netkit als virtuelle Infrastruktur realisiert werden und anschließend über Ansible konfiguriert werden. Zuletzt soll ein Bericht zu dem Netzwerk und der Umsetzung verfasst werden.
+Das Projekt soll mit Hilfe von Netkit als virtuelle Infrastruktur realisiert und anschließend über Ansible konfiguriert werden. Zuletzt soll ein Bericht zu dem Netzwerk und der Umsetzung verfasst werden.
 
 \section{Umgebung}
 
-Das Projekt wurde nicht innerhalb der VM umgesetzt, sondern für bessere Performance direkt auf einem privaten Rechner. Auf dem Rechner ist eine Linux-Distribution, die auf Ubuntu 18.10 basiert, installiert. Dabei hat Ansible die Version 2.7.8 und nutzt die Python-Version 3.6.7. Anstatt der originalen Netkit-Version wurde \href{https://netkit-ng.github.io/}{Netkit-ng} genutzt, welches ein neueres Filesystem nutzt, das auf Debian wheezy basiert. Das war notwendig, um die notwendige Version von Python zur Verfügung zu haben, da Ansible mindestens Python der Version 2.7 benötigt.
+Das Projekt wurde nicht innerhalb der VM umgesetzt, sondern direkt für bessere Performance auf einem privaten Rechner. Auf dem Rechner ist eine Linux-Distribution, die auf Ubuntu 18.10 basiert, installiert. Dabei hat Ansible die Version 2.7.8 und nutzt die Python-Version 3.6.7. Anstatt der originalen Netkit-Version wurde \href{https://netkit-ng.github.io/}{Netkit-ng} genutzt, welches ein neueres Filesystem nutzt, das auf Debian wheezy basiert. Das war notwendig, um die notwendige Version von Python zur Verfügung zu haben, da Ansible mindestens Python der Version 2.7 benötigt.
 
-Die Verbindung zwischen dem Host bzw. Ansible und den Netkit-VMs wird über SSH realisiert in einer Agent-less Architektur.
+Die Verbindung zwischen dem Host bzw. Ansible und den Netkit-VMs wird über SSH realisiert in einer Agentless Architektur.
 
 Durch die trotzdem veraltete Version des Netkit-File-Systems können einige Sachen nicht wie im Konzept beschrieben umgesetzt werden. Durch ein Update des File-Systems auf eine neuere Debian-Version, kann dies ermöglicht werden. Für dieses Projekt wurde versucht, die bereits vorhandene Software so wenig wie möglich zu verändern. Dementsprechend sind auch nur relevante Applikationen auf den VMs aktuell, es wurde kein generelles Update ausgeführt.
 
 \section{Anforderungen}
-Die Fakultät ist in einem weit von der Universität entfernten Gebäudekomplex untergebracht, die Infrastruktur für die Fakultät muss dementsprechend als eigene, unabhängige Infrastruktur behandelt werden. Diese Infrastruktur soll alle notwendigen Dienste der Fakultät beinhalten, wie ein Web-Auftritt, ein Mail-Service und die AAA-Services beinhalten.
-Das Netzwerk der Fakultät erhält Internet und Anbindung an die Universität über eine sogenannte Dark Fiber-Leitung, diese ist eine bisher ungenutzte und angemietet Leitung eines bereits verlegten Netzes.
+Die Fakultät ist in einem weit von der Universität entfernten Gebäudekomplex untergebracht, die Infrastruktur für die Fakultät muss dementsprechend als eigene, unabhängige Infrastruktur behandelt werden. Diese Infrastruktur soll alle notwendigen Dienste der Fakultät beinhalten, wie ein Web-Auftritt, ein Mail-Service und die AAA-Services.
+Das Netzwerk der Fakultät erhält Internet und Anbindung an die Universität über eine sogenannte Dark Fiber-Leitung, diese ist eine bisher ungenutzte und angemietete Leitung eines bereits verlegten Netzes.
 
 Außerdem sollen die einzelnen Server über SNMP über Icinga, Zabbix oder Ganglia überwachbar sein.
