@@ -1,0 +1,9 @@
+---
+- hosts: dmz-mail
+  tasks:
+  - name: Test
+    become: true
+    apt:
+      name: git
+      state: latest
+      update_cache: yes
